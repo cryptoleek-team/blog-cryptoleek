@@ -93,7 +93,10 @@ export function getAllPosts(): BlogPost[] {
 }
 
 export function getPostBySlug(slug: string): BlogPost | null {
-  const fullPath = path.join(BLOG_DIR, `${slug}.md`);
+  // Sanitize slug to prevent path traversal
+  const safeSlug = path.basename(slug);
+  const fullPath = path.join(BLOG_DIR, `${safeSlug}.md`);
+  if (!path.resolve(fullPath).startsWith(path.resolve(BLOG_DIR))) return null;
   if (!fs.existsSync(fullPath)) return null;
 
   const raw = fs.readFileSync(fullPath, "utf-8");
