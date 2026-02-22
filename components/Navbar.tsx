@@ -20,10 +20,10 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-zinc-200/80 bg-white/80 backdrop-blur dark:border-white/10 dark:bg-black/45">
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <Link href="/" className="inline-flex items-center gap-2.5 text-sm font-bold tracking-[0.18em] text-zinc-900 dark:text-zinc-100">
+        <a href="https://cryptoleek.xyz" className="inline-flex items-center gap-2.5 text-sm font-bold tracking-[0.18em] text-zinc-900 dark:text-zinc-100">
           <Image src="/jiucai_logo.png" alt="jiucai logo" width={30} height={30} className="h-7 w-7 rounded-sm object-contain" priority />
           <span>CRYPTOLEEK</span>
-        </Link>
+        </a>
 
         <div className="hidden items-center gap-3 sm:flex">
           {navItems.map((item) => (

@@ -88,7 +88,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px]">
         <div
-          className="prose-content max-w-none rounded-2xl border bg-[var(--surface)] p-6 leading-8 sm:p-8"
+          className="prose prose-zinc dark:prose-invert max-w-none rounded-2xl border bg-[var(--surface)] p-6 leading-8 sm:p-8"
           dangerouslySetInnerHTML={{ __html: html }}
         />
         <TableOfContents items={toc} />
