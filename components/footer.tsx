@@ -1,25 +1,14 @@
-import Link from "next/link";
-import { siteConfig } from "@/lib/site";
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
 
 export function Footer() {
+  const { t } = useLanguage();
+
   return (
-    <footer className="mt-16 border-t bg-[var(--surface)]/80">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-sm text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between sm:px-6">
-        <p>© {new Date().getFullYear()} CryptoLeek Blog. All rights reserved.</p>
-        <div className="flex gap-4">
-          <Link className="hover:text-[var(--foreground)]" href={siteConfig.social.x}>
-            X
-          </Link>
-          <Link className="hover:text-[var(--foreground)]" href={siteConfig.social.github}>
-            GitHub
-          </Link>
-          <Link className="hover:text-[var(--foreground)]" href={siteConfig.social.linkedin}>
-            LinkedIn
-          </Link>
-          <Link className="hover:text-[var(--foreground)]" href="/feed.xml">
-            RSS
-          </Link>
-        </div>
+    <footer className="border-t border-zinc-200/80 dark:border-white/10">
+      <div className="mx-auto w-full max-w-5xl px-4 py-8 text-center text-sm text-zinc-500 dark:text-zinc-400 sm:px-6 lg:px-8">
+        <p>{t.footer.copyright}</p>
       </div>
     </footer>
   );

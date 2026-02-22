@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { Providers } from "@/components/Providers";
+import SupportSection from "@/components/SupportSection";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -33,16 +34,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen antialiased">
-        <Script id="theme-init" strategy="beforeInteractive">
-          {`(function(){try{const s=localStorage.getItem('theme');const d=window.matchMedia('(prefers-color-scheme: dark)').matches;const t=s?s==='dark':d;document.documentElement.classList.toggle('dark',t);}catch(e){}})();`}
-        </Script>
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6">{children}</main>
-          <Footer />
-        </div>
+    <html lang="zh-CN" suppressHydrationWarning>
+      <body className="min-h-screen antialiased text-zinc-900 dark:text-zinc-100">
+        <Providers>
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6 lg:px-8">{children}</main>
+            <SupportSection />
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );

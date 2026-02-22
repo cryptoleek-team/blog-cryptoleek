@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { TagsHeading } from "@/components/TagsHeading";
 import { getAllTags, getPostsByTag } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export default function TagsPage() {
 
   return (
     <section className="rounded-2xl border bg-[var(--surface)] p-8">
-      <h1 className="mb-6 text-3xl font-semibold tracking-tight">Tags</h1>
+      <TagsHeading />
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {tags.map((tag) => (
           <Link

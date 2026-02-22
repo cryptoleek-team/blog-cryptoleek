@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { PostMeta } from "@/components/PostMeta";
 import { RelatedPosts } from "@/components/related-posts";
 import { TableOfContents } from "@/components/table-of-contents";
 import { getAllPosts, getPostBySlug, getPostHtml, getRelatedPosts, getTableOfContents } from "@/lib/blog";
@@ -80,11 +81,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   return (
     <article>
       <header className="mb-8 rounded-2xl border bg-[var(--surface)] p-8">
-        <div className="mb-3 flex flex-wrap items-center gap-2 text-sm text-[var(--muted)]">
-          <time dateTime={post.date}>{new Date(post.date).toLocaleDateString()}</time>
-          <span>•</span>
-          <span>{post.readingTime} min read</span>
-        </div>
+        <PostMeta date={post.date} readingTime={post.readingTime} />
         <h1 className="max-w-4xl text-3xl font-semibold tracking-tight sm:text-4xl">{post.title}</h1>
         <p className="mt-4 max-w-3xl text-[var(--muted)]">{post.excerpt}</p>
       </header>
