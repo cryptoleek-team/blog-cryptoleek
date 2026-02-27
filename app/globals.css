@@ -32,3 +32,39 @@ body {
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
 }
 
+
+/* Mobile-friendly content */
+@media (max-width: 640px) {
+  .prose {
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+  .prose h1 { font-size: 1.5rem; }
+  .prose h2 { font-size: 1.25rem; }
+  .prose h3 { font-size: 1.1rem; }
+  .prose pre {
+    font-size: 0.8rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+  }
+  .prose img {
+    border-radius: 0.5rem;
+  }
+  .prose table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .prose :where(code):not(:where(pre *)) {
+    word-break: break-all;
+  }
+}
+
+/* Prevent content overflow on all screens */
+.prose :where(pre) {
+  overflow-x: auto;
+}
+.prose :where(a) {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}

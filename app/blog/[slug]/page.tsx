@@ -34,14 +34,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description: post.excerpt,
       url,
       publishedTime: post.date,
+      modifiedTime: post.date,
       tags: post.tags,
-      images: post.coverImage ? [{ url: post.coverImage }] : undefined
+      images: post.coverImage ? [{ url: post.coverImage, width: 1200, height: 630, alt: post.title }] : undefined
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
-      images: post.coverImage ? [post.coverImage] : undefined
+      images: post.coverImage ? [post.coverImage] : undefined,
+      creator: "@cryptoleek"
     }
   };
 }
@@ -67,31 +69,45 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     datePublished: post.date,
     dateModified: post.date,
     author: {
-      "@type": "Organization",
-      name: "CryptoLeek Blog"
+      "@type": "Person",
+      name: "CryptoLeek",
+      url: "https://x.com/cryptoleek"
     },
     publisher: {
       "@type": "Organization",
-      name: "CryptoLeek Blog"
+      name: "CryptoLeek Blog",
+      url: siteConfig.url
     },
-    mainEntityOfPage: postUrl,
-    keywords: post.tags.join(", ")
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": postUrl
+    },
+    keywords: post.tags.join(", "),
+    image: post.coverImage || undefined
   };
 
   return (
     <article>
-      <header className="mb-8 rounded-2xl border bg-[var(--surface)] p-8">
+      <header className="mb-8 rounded-2xl border bg-[var(--surface)] p-5 sm:p-8">
         <PostMeta date={post.date} readingTime={post.readingTime} />
-        <h1 className="max-w-4xl text-3xl font-semibold tracking-tight sm:text-4xl">{post.title}</h1>
-        <p className="mt-4 max-w-3xl text-[var(--muted)]">{post.excerpt}</p>
+        <h1 className="max-w-4xl text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">{post.title}</h1>
+        <p className="mt-4 max-w-3xl text-sm sm:text-base text-[var(--muted)]">{post.excerpt}</p>
       </header>
+
+      {/* Mobile TOC - collapsible */}
+      <div className="mb-6 lg:hidden">
+        <TableOfContents items={toc} mobile />
+      </div>
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px]">
         <div
-          className="prose prose-zinc dark:prose-invert max-w-none rounded-2xl border bg-[var(--surface)] p-6 leading-8 sm:p-8"
+          className="prose prose-zinc dark:prose-invert max-w-none rounded-2xl border bg-[var(--surface)] p-4 leading-8 sm:p-6 lg:p-8 prose-img:rounded-lg prose-pre:overflow-x-auto prose-table:overflow-x-auto overflow-hidden break-words"
           dangerouslySetInnerHTML={{ __html: html }}
         />
-        <TableOfContents items={toc} />
+        {/* Desktop TOC - sidebar */}
+        <div className="hidden lg:block">
+          <TableOfContents items={toc} />
+        </div>
       </div>
 
       <RelatedPosts posts={related} />
